@@ -1,0 +1,5 @@
+/* pages/my/mycreatedcommunity/mycreatedcommunity.wxss */
+page{
+    height: 100%;
+    background-color: white;
+}

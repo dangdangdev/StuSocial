@@ -1,0 +1,30 @@
+
+<home wx:if="{{pageCur=='home'}}"></home>
+<community wx:if="{{pageCur=='community'}}"></community>
+<news wx:if="{{pageCur=='news'}}"></news>
+<my wx:if="{{pageCur=='my'}}"></my>
+
+<view class="box">
+  <view class="cu-bar tabbar bg-white foot">
+    <view class="action {{pageCur=='home'?'text-green':'text-gray'}}" bindtap="navChange" data-cur="home">
+      <view class="cuIcon-homefill"></view> 首页
+    </view>
+    <view class="action {{pageCur=='community'?'text-green':'text-gray'}}" bindtap="navChange" data-cur="community">
+      <view class="cuIcon-community"></view> 社区
+    </view>
+    <view class="action text-gray add-action">
+      <button class="cu-btn cuIcon-add bg-green shadow" bindtap="buildCommunity"></button>
+      新建
+    </view>
+    <view class="action {{pageCur=='news'?'text-green':'text-gray'}}" bindtap="navChange" data-cur="news">
+      <view class="cuIcon-new">
+      </view>
+      消息
+    </view>
+    <view class="action {{pageCur=='my'?'text-green':'text-gray'}}" bindtap="navChange" data-cur="my">
+      <view class="cuIcon-my">
+      </view>
+      我的
+    </view>
+  </view>
+</view>

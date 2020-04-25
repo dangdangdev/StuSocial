@@ -1,0 +1,109 @@
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">社区</view>
+</cu-custom>
+<view>
+    <scroll-view wx:if="{{!clickPublish}}" scroll-y="true" style="height:600px;" bindscroll="onScroll"
+        bindscrolltolower="pullUpload">
+        <view class="allQuestion bg-gray fixed" wx:if="{{scrollTop >= 100}}">
+            <text class="text-lg">全部问题</text>
+            <view>
+                <text bindtap="clickPublishMethod" class="cuIcon-add text-lg text-blue">发表</text>
+            </view>
+        </view>
+        <view class="header bg-white">
+            <view class="header_1 justify-between align-center ">
+                <text class="text-black text-lg">{{community.name}}</text>
+                <button wx:if="{{stuJoinComStatus==0}}" class="cu-btn bg-blue">
+                    <text class="cuIcon-loading2 iconfont-spin"></text>
+                </button>
+                <button wx:if="{{stuJoinComStatus==1}}" class="cu-btn bg-blue" bindtap="leaveCommunity"
+                    data-id="{{community.id}}">已加入</button>
+                <button wx:if="{{stuJoinComStatus==2}}" class="cu-btn bg-gray shadow text-blue" bindtap="joinCommunity"
+                    data-id="{{community.id}}">加入</button>
+            </view>
+            <view class="header_2">
+                <text>{{community.content}}</text>
+            </view>
+            <view class="header_3 justify-between align-center">
+                <view>
+                    {{community.questionCount}}个动态
+                </view>
+                <view>
+                    {{community.studentCount}}个成员
+                    <text class="text-blue" bindtap="showModal"> 查看全部</text>
+                </view>
+            </view>
+        </view>
+        <view class="cu-form-group cu-modal {{showModal==true?'show':''}}">
+            <view class="cu-dialog">
+                <view class="cu-bar bg-white justify-end">
+                    <view class="content">成员列表</view>
+                    <view class="action" bindtap="hideModal">
+                        <text class="cuIcon-close text-red"></text>
+                    </view>
+                </view>
+                <scroll-view scroll-y="true" style="height:400px;" class="bg-white">
+                    <view class="block">
+                        <view class="cu-list menu text-left">
+                            <view class="cu-item" wx:for="{{comMembers}}">
+                                <view class="header_1 justify-left">
+                                    <image class="cu-avatar round" src="{{item.student.avatarUrl}}" mode="aspectFill">
+                                    </image>
+                                    <view class="flex align-center" style="padding-left: 3%;">{{item.student.name}}</view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </scroll-view>
+            </view>
+        </view>
+        <view>
+            <view class="allQuestion bg-gray">
+                <text class="text-lg">全部问题</text>
+                <view>
+                    <text bindtap="clickPublishMethod" class="cuIcon-add text-lg text-blue">发表</text>
+                </view>
+            </view>
+            <view class="bg-white" wx:for="{{questionList}}">
+                <view class="bg-grey light" style="height:2px">
+                </view>
+                <view class="header" bindtap="enterQuestionDetail" data-id="{{item.id}}">
+                    <view class="header_1 justify-left">
+                        <image class="cu-avatar round" src="{{item.student.avatarUrl}}" mode="aspectFill">
+                        </image>
+                        <view class="flex align-center" style="padding-left: 3%;">{{item.student.name}}</view>
+                    </view>
+                    <view class="intro_info">
+                        {{item.content}}
+                    </view>
+                    <view class="header_1 " style="padding-bottom: 3%;">
+                        <text decode="{{true}}" space="{{true}}">{{item.answerCount}}条回复&nbsp;&nbsp;热度:{{item.record}}</text>
+                    </view>
+                </view>
+                <view class="bg-gray light" style="height:2px">
+                </view>
+            </view>
+            <view class="bg-white" wx:if="{{loading}}">
+                <image src="https://image.weilanwl.com/gif/loading-white.gif" mode="aspectFit"
+                    class="gif-white response" style="height:240rpx"></image>
+            </view>
+            <view wx:else style="height: 20px;" class="bg-white padding-sm">
+                <text style="padding-left: 40%;">已经到底了</text>
+            </view>
+        </view>
+    </scroll-view>
+
+    <view wx:else class="bg-white send">
+        <view class="send_1">
+            <text class="cuIcon-close text-xxl light" bindtap="closePublish"></text>
+            <text class="cuIcon-check text-xxl {{canSend?'text-blue':''}} light" bindtap="sendQuestion"></text>
+        </view>
+        <view class="bg-gray light" style="height:1px"></view>
+        <view class="send_2">
+            <text class="text-black text-lg text-bold">{{community.name}}</text>
+        </view>
+        <view class="bg-grey light" style="height:6px;"></view>
+        <textarea maxlength="10000" style="width: 100%;height:1000px;" class="send_3" bindinput="textareaInput" placeholder="写问题"></textarea>
+    </view>
+</view>

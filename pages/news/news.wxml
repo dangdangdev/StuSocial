@@ -1,0 +1,11 @@
+<!--pages/news/news.wxml-->
+<view class="cu-bar search bg-gradual-blue" style="padding-top:{{StatusBar}}px;padding-right:30%;padding-bottom:10px;">
+    <view class="search-form round">
+        <text class="cuIcon-search"></text>
+        <text class="text-grey">社区 | 问题 | 回答 | 用户</text>
+    </view>
+</view>
+
+<view class="flex solid-bottom padding justify-center">
+    <view class="padding-sm margin-xs">功能待开发</view>
+</view>

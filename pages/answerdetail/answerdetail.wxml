@@ -1,0 +1,192 @@
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">回答</view>
+</cu-custom>
+<view>
+    <scroll-view wx:if="{{!clickPublish}}" scroll-y="true" style="height:600px;" bindscroll=""
+        style="margin-bottom:17%;">
+        <view class="allAnswers bg-gray fixed" wx:if="{{scrollTop >= 100}}">
+            <text class="text-lg">全部回答</text>
+            <view>
+                <text bindtap="clickPublishMethod" class="cuIcon-add text-lg text-blue">写回答</text>
+            </view>
+        </view>
+        <view class="header3 bg-white">
+            <view class="header_1 justify-left">
+                <image class="cu-avatar round" src="{{question.student.avatarUrl}}" mode="aspectFill">
+                </image>
+                <view class="flex align-center" style="padding-left: 3%;">{{question.student.name}}</view>
+            </view>
+            <view class="header_2">
+                <text>{{question.content}}
+                </text>
+            </view>
+            <view class="header_3 align-center">
+                <view wx:if="{{question.answerCount>=1}}">
+                    <view class="text-blue" bindtap="findAllAnswer">查看全部{{question.answerCount}}条回答</view>
+                </view>
+                <view wx:else>
+                    总共{{question.answerCount}}条回答
+                </view>
+            </view>
+        </view>
+
+        <view class="bg-white">
+            <view class="bg-grey light" style="height:2px">
+            </view>
+            <view class="header3">
+                <view class="flex justify-between align-center">
+                    <view class="header_1 justify-left">
+                        <image class="cu-avatar round" src="{{answer.student.avatarUrl}}" mode="aspectFill">
+                        </image>
+                        <view class="flex align-center" style="padding-left: 3%;">{{answer.student.name}}</view>
+                    </view>
+                    <view style="padding-top: 3%;">
+                        <button wx:if="{{followStatus==0}}" class="cu-btn bg-blue ">
+                            <text class="cuIcon-loading2 iconfont-spin"></text>
+                        </button>
+                        <button wx:if="{{followStatus==1}}" class="cu-btn bg-blue flex-row align-center"
+                            bindtap="deleteStuFollow">
+                            <text>已关注</text>
+                        </button>
+                        <button wx:if="{{followStatus==2}}" class="cu-btn bg-gray  flex-row align-center"
+                            bindtap="addStuFollow">
+                            <text class="cuIcon-add"></text>
+                            <text>关注</text>
+                        </button>
+                    </view>
+                </view>
+
+                <view class="header_2">
+                    <text>
+                        {{answer.content}}
+                    </text>
+                </view>
+            </view>
+
+        </view>
+    </scroll-view>
+</view>
+<view class="modals modals-bottom-dialog" hidden="{{hideModal}}">
+    <view class="modals-cancel" bindtap="hideModal"></view>
+    <view class="bottom-dialog-body bottom-pos" animation="{{animationData}}">
+        <view class="flex-column align-center" style="padding-left: 5%;padding-right: 5%;padding-top: 3%;">
+            <view class="flex justify-between solid-bottom">
+                <text class="cuIcon-close text-xxl" bindtap="hideModal"></text>
+                <text class="text-xl">全部{{answer.commentCount}}条评论</text>
+            </view>
+            <scroll-view scroll-y="true" style="height:465px;" bindscroll="onScroll" bindscrolltolower="pullUpload">
+                <view wx:for="{{commentList}}">
+                    <view class="header">
+                        <view class="header_1 justify-left">
+                            <image class="cu-avatar round" src="{{item.student.avatarUrl}}" mode="aspectFill">
+                            </image>
+                            <view class="flex align-center" style="padding-left: 3%;">{{item.student.name}}</view>
+                        </view>
+                        <view class="header_2">
+                            {{item.content}}
+                        </view>
+                        <view class="header_1 justify-between" style="padding-bottom: 3%;">
+                            <view bindtap="clickCommentZan" data-index="{{index}}">
+                                <text class="cuIcon-appreciate {{commentsZanStatus[index]?'text-blue':''}}"></text>
+                                <text>{{item.zanCount}}</text>
+                            </view>
+                            <text class="text-blue" bindtap="showReplyModal"
+                                data-index="{{index}}">查看全部{{item.replyCount}}条回复</text>
+                        </view>
+                    </view>
+                    <view class="bg-gray light" style="height:1px"></view>
+                </view>
+            </scroll-view>
+        </view>
+        <view class="cu-bar foot input {{InputBottom1!=0?'cur':''}}" style="bottom:{{InputBottom1}}px">
+            <view class="action">
+                <text class="cuIcon-sound text-grey"></text>
+            </view>
+
+            <input class="solid-bottom" value="{{inputComment}}" bindinput="commentInput" bindfocus="InputFocus1"
+                bindblur="InputBlur1" adjust-position="{{false}}" focus="{{false}}" maxlength="300"
+                cursor-spacing="10"></input>
+            <view class="action">
+                <text class="cuIcon-emojifill text-grey"></text>
+            </view>
+            <button wx:if="{{inputComment==''}}" class="cu-btn bg-gray shadow">发送</button>
+            <button wx:else class="cu-btn bg-green shadow" bindtap="sendComment">发送</button>
+        </view>
+    </view>
+</view>
+<view class="modals modals-bottom-dialog" hidden="{{hideReplyModal}}">
+    <view class="modals-cancel" bindtap="hideReplyModal"></view>
+    <view class="bottom-dialog-body bottom-pos" animation="{{animationData}}">
+        <view class="flex-column align-center" style="padding-left: 2%;padding-right: 2%;padding-top: 3%;">
+            <view class="flex justify-between solid-bottom">
+                <text class="cuIcon-back_android text-xxl" bindtap="hideReplyModal"></text>
+                <text class="text-xl">全部{{replyList.length}}条回复</text>
+            </view>
+            <view class="header">
+                <view class="header_1 justify-left">
+                    <image class="cu-avatar round" src="{{curComment.student.avatarUrl}}" mode="aspectFill">
+                    </image>
+                    <view class="flex align-center" style="padding-left: 3%;">{{curComment.student.name}}</view>
+                </view>
+                <view class="header_2">
+                    {{curComment.content}}
+                </view>
+            </view>
+            <view class="bg-gray light" style="height:1px"></view>
+            <scroll-view scroll-y="true" style="height:387px;" bindscrolltolower="pullUpload">
+                <view wx:for="{{replyList}}" style="padding-left:3%;">
+                    <view class="header1">
+                        <view class="header_1 justify-left">
+                            <image class="cu-avatar round" src="{{item.student.avatarUrl}}" mode="aspectFill">
+                            </image>
+                            <view class="flex align-center" style="padding-left: 3%;">{{item.student.name}}</view>
+                        </view>
+                        <view class="header_2">
+                            {{item.content}}
+                        </view>
+                    </view>
+                    <view class="bg-gray light" style="height:1px;"></view>
+                </view>
+            </scroll-view>
+        </view>
+        <view class="cu-bar foot input {{InputBottom2!=0?'cur':''}}" style="bottom:{{InputBottom2}}px">
+            <view class="action">
+                <text class="cuIcon-sound text-grey"></text>
+            </view>
+            <input class="solid-bottom" value="{{inputReply}}" bindinput="replyInput" bindfocus="InputFocus2"
+                bindblur="InputBlur2" adjust-position="{{false}}" focus="{{false}}" maxlength="300"
+                cursor-spacing="10"></input>
+            <view class="action">
+                <text class="cuIcon-emojifill text-grey"></text>
+            </view>
+            <button wx:if="{{inputReply==''}}" class="cu-btn bg-gray shadow">发送</button>
+            <button wx:else class="cu-btn bg-green shadow" bindtap="sendReply">发送</button>
+        </view>
+    </view>
+</view>
+<view wx:if="{{hideModal}}" style="position:fixed;bottom:0;" class="bg-white">
+    <view class="bg-gray" style="height: 1px;"></view>
+    <view class="flex justify-between padding-sm" style="width: 100%;">
+        <view>
+            <button wx:if="{{zanStatus==0}}" class="cu-btn round bg-blue ">
+                <text class="cuIcon-loading2 iconfont-spin"></text>
+            </button>
+            <button wx:if="{{zanStatus==1}}" class="cu-btn round bg-blue flex-row align-center"
+                bindtap="deletezananswer">
+                <text>赞同</text>
+                <text>{{answer.zanCount}}</text>
+            </button>
+            <button wx:if="{{zanStatus==2}}" class="cu-btn bg-gray round  flex-row align-center" bindtap="addzananswer">
+                <text>赞同</text>
+                <text>{{answer.zanCount}}</text>
+            </button>
+        </view>
+        <view class="flex align-center" style="padding-left:250px;" bindtap="showModal">
+            <text class="cuIcon-message text-xxl"></text>
+            <text class="text-xl" decode="{{true}}" space="{{true}}">{{answer.commentCount}}</text>
+        </view>
+    </view>
+
+
+</view>

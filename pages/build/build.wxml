@@ -1,0 +1,101 @@
+<!--pages/build/build.wxml-->
+<cu-custom bgColor="bg-gradual-pink" isBack="{{true}}">
+	<view slot="backText"></view>
+	<view slot="content">新建社区</view>
+</cu-custom>
+
+<view class='cu-load load-modal' wx:if="{{loading}}">
+	<!-- <view class='cuIcon-emojifill text-orange'></view> -->
+	<image src='/images/logo.png' class='png' mode='aspectFit'></image>
+	<view class='gray-text'>上传中...</view>
+</view>
+
+<form action="">
+	<view class="cu-form-group margin-top">
+
+		<view class="title">社区名称</view>
+		<input style="text-align: right;" bindinput="comNameInput"
+			placeholder-class="text-align:right; {{hasCommited==true? 'place-holder1':'place-holder'}}"
+			placeholder="输入社区昵称"></input>
+	</view>
+	<view class="cu-form-group">
+		<view class="title">分类</view>
+		<picker bindchange="pickerChange" value="{{index}}" range="{{naviBarList}}">
+			<view class="picker">
+				{{index?naviBarList[index]:'不可为空'}}
+			</view>
+		</picker>
+	</view>
+	<view class="cu-form-group">
+		<view class="action">
+			社区成员
+		</view>
+		<view class="action">
+			<button class="cu-btn bg-green shadow" bindtap="showModal" data-target="checkboxModal">选择</button>
+		</view>
+	</view>
+	<view class="cu-form-group cu-modal {{modalName=='checkboxModal'?'show':''}}" bindtap="noChoosedChexbox">
+		<view class="cu-dialog" catchtap>
+			<view class="cu-bar bg-white justify-end">
+				<view class="content">好友列表</view>
+				<view class="action" bindtap="hideModal">
+					<text class="cuIcon-close text-red"></text>
+				</view>
+			</view>
+			<view class="block">
+				<view class="cu-list menu text-left">
+					<view class="cu-item" wx:for="{{myAllFriends}}">
+						<label class="flex justify-between align-center flex-sub">
+							<view>{{item.name}}</view>
+							<button class="cu-btn orange block {{item.checked?'bg-orange':'line-orange'}}"
+								bindtap="chooseCheckbox" data-name="{{item.name}}"> 添加
+							</button>
+						</label>
+					</view>
+				</view>
+				<view class="cu-bar bg-white">
+					<view class="action margin-0 flex-sub text-red solid-left" bindtap="noChoosedChexbox">重置</view>
+					<view class="action margin-0 flex-sub text-green solid-left" bindtap="hideModal">确定</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="cu-bar bg-white margin-top">
+		<view class="action">
+			图片上传
+		</view>
+		<view class="action">
+			(<text class="text-red">{{imgList.length}}</text>/4)
+		</view>
+	</view>
+	<view class="cu-form-group">
+		<view class="grid col-4 grid-square flex-sub">
+			<view class="bg-img" wx:for="{{imgList}}" wx:key="{{index}}" bindtap="ViewImage"
+				data-url="{{imgList[index]}}">
+				<image src='{{imgList[index]}}' mode='aspectFill'></image>
+				<view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
+					<text class="cuIcon-close"></text>
+				</view>
+			</view>
+			<view class="solids" bindtap="ChooseImage" wx:if="{{imgList.length<4}}">
+				<text class="cuIcon-cameraadd"></text>
+			</view>
+		</view>
+	</view>
+	<view class="cu-bar bg-white">
+		<view class="action">
+			社区描述
+		</view>
+		<view class="action">
+			(<text class="text-red">{{comIntroduce.length}}</text>/200)
+		</view>
+	</view>
+	<view class="cu-form-group">
+		<textarea maxlength="200" disabled="{{modalName!=null}}"
+			placeholder-class="{{hasCommited==true? 'place-holder1':'place-holder'}}" bindinput="textareaInput"
+			placeholder="社区详情描述"></textarea>
+	</view>
+	<view class="padding">
+		<button class="cu-btn block bg-yellow margin-tb-sm" bindtap="submit">提交</button>
+	</view>
+</form>

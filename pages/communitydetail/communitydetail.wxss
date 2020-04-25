@@ -1,0 +1,102 @@
+/* pages/communitydetail/communitydetail.wxss */
+page{
+    height: 100%;
+    width: 100%;
+    background-color: white;
+}
+
+.send{
+    display: flex;
+    flex-direction: column;
+}
+
+.send_1{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.send_2{
+    display: flex;
+    align-items: center;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top:10px;
+    padding-bottom: 10px;
+}
+
+.send_3{
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top:20px;
+}
+
+.header{
+    padding-left:5%;
+    padding-right: 5%;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.header_1{
+    display: flex;
+    flex-direction: row;
+    padding-top: 3%;
+}
+
+.header_2{
+    justify-content: left;
+    padding-top: 3%;
+}
+
+.header_3{
+    display: flex;
+    flex-direction: row;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+.allQuestion{
+    display: flex;
+    height:40px;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.fixed{
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+
+.text-overflow{
+  height: 85rpx;
+  display: -webkit-box;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:2;
+}
+
+.intro_info{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:3;
+  overflow: hidden;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  padding-top:3%;
+  line-height: 40rpx;
+  font-size: 28rpx;
+  color: black;
+}

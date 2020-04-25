@@ -1,0 +1,104 @@
+<wxs module="formatString1" src="../../filter/formatString1.wxs"></wxs>
+<view class="cu-bar search bg-gradual-blue" style="padding-top:{{StatusBar}}px;padding-right:30%;padding-bottom:10px;">
+    <view class="search-form round">
+        <text class="cuIcon-search"></text>
+        <text class="text-grey">社区 | 问题 | 回答 | 用户</text>
+    </view>
+</view>
+<scroll-view scroll-x class="bg-white nav" scroll-with-animation :scroll-left="scrollLeft">
+    <view class="flex text-center">
+        <view class="cu-item flex-sub {{tabTopCur==1?'text-blue cur':''}}" bindtap="tabTopSelect">
+            <view slot="content">学校</view>
+        </view>
+        <view class="cu-item flex-sub {{tabTopCur==2?'text-blue cur':''}}" bindtap="tabTopSelect">
+            <view slot="content">分类</view>
+        </view>
+    </view>
+</scroll-view>
+<view wx:if="{{tabTopCur==1}}">
+    <view class="cu-form-group">
+        <view class="title">学校</view>
+        <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange"
+            value="{{multiIndex}}" range="{{multiArray}}">
+            <view class="picker">
+                {{multiArray[0][multiIndex[0]]}}-{{multiArray[1][multiIndex[1]]}}
+            </view>
+        </picker>
+    </view>
+
+
+    <scroll-view class="bg-white" scroll-y="true" bindscrolltolower="pullUpload1" style="height: 550px;">
+        <view class="cu-list menu-avatar comment">
+            <view class="cu-item solids-bottom" wx:for="{{communityList1}}" wx:for-item="item1" wx:for-index="index1">
+                <view class="cu-avatar round" style="background-image:url({{item1.student.avatarUrl}});"></view>
+                <view class="content" >
+                    <view class="flex justify-between">
+                        <view style="display:flex;flex-direction: column;">
+                            <text class="text-grey">{{item1.student.name}}</text>
+                            <text class="text-gray text-content text-df">{{item1.community.name}}</text>
+                        </view>
+                        <view style="margin-right:15rpx;">
+                            <button class="cu-btn bg-gray shadow text-blue" bindtap="joinCommunity"
+                                data-id="{{item1.id}}">加入</button>
+                        </view>
+                    </view>
+                    <view class="grid col-4 grid-square flex-sub margin-top-sm" bindtap="enterCommunity" data-id="{{item1.community.id}}">
+                        <view class="bg-img " wx:for="{{item1.community.imgCount}}" wx:for-item="item2"
+                            wx:for-index="index2">
+                            <image lazy-load="true"
+                                src='http://localhost:8080/stusocial/community/getImage/{{item1.community.id}}-{{index2}}.png'
+                                mode='aspectFill'>
+                            </image>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="bg-white" wx:if="{{loading1}}">
+            <image src="https://image.weilanwl.com/gif/loading-white.gif" mode="aspectFit" class="gif-white response"
+                style="height:240rpx"></image>
+        </view>
+        <view wx:else style="height: 60px;" class="bg-white padding-sm">
+            <text style="padding-left: 40%;">已经到底了</text>
+        </view>
+        <view style="height:35px" class="bg-white">
+        </view>
+    </scroll-view>
+</view>
+<view wx:else>
+    <view class="content1 bg-white">
+        <view class='left bg-white'>
+            <view class="cu-item {{index==tabCur?'select':'normal'}}" wx:for="{{naviBarList}}" wx:key
+                bindtap='tabSelect' data-id="{{index}}">
+                {{item}}
+            </view>
+        </view>
+        <view class='right bg-white'>
+            <scroll-view scroll-y="true" bindscrolltolower="pullUpload2" style="height: 480px;">
+                <view wx:for="{{communityList2}}">
+                    <view class="comstyle" bindtap="enterCommunity" data-id="{{item.community.id}}">
+                        <view class="comleft">
+                            <image style="max-width: 50rpx; max-height: 50rpx;border-radius:20%;" class="avatar"
+                                lazy-load='true' mode='aspectFill' src="{{item.student.avatarUrl}}"></image>
+                        </view>
+                        <view class="comright">
+                            <text class="text-black">{{item.community.name}}</text>
+                            <text class="text-cut text-sm">{{item.community.content}}</text>
+                            <text class="text-grey text-sm" decode="{{true}}" space="{{true}}">{{item.community.questionCount}}帖子&nbsp;&nbsp;{{item.community.studentCount}}人加入</text>
+                        </view>
+                    </view>
+                    <view class="line-3"></view>
+                </view>
+                <view class="bg-white" wx:if="{{loading2}}">
+                    <image src="https://image.weilanwl.com/gif/loading-white.gif" mode="aspectFit"
+                        class="gif-white response" style="height:240rpx"></image>
+                </view>
+                <view wx:else style="height: 60px;" class="padding-sm">
+                    <text style="padding-left: 40%;">已经到底了</text>
+                </view>
+                <view style="height:35px">
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,8 @@
+/* pages/build/build.wxss */
+.place-holder{
+
+}
+
+.place-holder1{
+    color:red;
+}

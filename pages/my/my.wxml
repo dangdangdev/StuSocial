@@ -1,0 +1,57 @@
+<scroll-view scroll-y class="scrollPage">
+    <view class="UCenter-bg">
+        <image src="/images/logo.png" class="png" mode="widthFix"></image>
+        <view class="text-xl">StuSocial
+            <text class="text-df">v1.0</text>
+        </view>
+        <view class="margin-top-sm">
+            <text>dang</text>
+        </view>
+        <image src="/images/wave.gif" mode="scaleToFill" class="gif-wave"></image>
+    </view>
+</scroll-view>
+<view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
+    <view class="cu-item arrow">
+        <navigator class="content" url="/pages/my/mycreatedcommunity/mycreatedcommunity" hover-class="none">
+            <image src="/images/logo.png" class="png" mode="aspectFit"></image>
+            <text class="text-grey">我创建的社区</text>
+        </navigator>
+    </view>
+    <view class="cu-item arrow">
+        <navigator class="content" url="/pages/my/myjoinedcommunity/myjoinedcommunity" hover-class="none">
+            <image src="/images/logo.png" class="png" mode="aspectFit"></image>
+            <text class="text-grey">我加入的社区</text>
+        </navigator>
+    </view>
+    <view class="cu-item arrow">
+        <navigator class="content" url="/pages/my/mypublishedquestion/mypublishedquestion" hover-class="none">
+            <image src="/images/logo.png" class="png" mode="aspectFit"></image>
+            <text class="text-grey">我发布的问题</text>
+        </navigator> 
+    </view>
+    <view class="cu-item arrow">
+        <navigator class="content" url="/pages/my/myansweredquestion/myansweredquestion" hover-class="none">
+            <text class="cuIcon-formfill text-green"></text>
+            <text class="text-grey">我的回答</text>
+        </navigator>
+    </view>
+    <view class="cu-item arrow">
+        <navigator class="content" url="/pages/my/myfollowed/myfollowed" hover-class="none">
+            <text class="cuIcon-appreciatefill text-red"></text>
+            <text class="text-grey">我关注的答主</text>
+        </navigator>
+    </view>
+    <view class="cu-item arrow">
+        <button class="cu-btn content" open-type="feedback">
+        <text class="cuIcon-writefill text-cyan"></text>
+        <text class="text-grey">意见反馈</text>
+      </button>
+    </view>
+    <view class="cu-item arrow">
+        <navigator class="content" url="/pages/about/test/list" hover-class="none">
+            <text class="cuIcon-creativefill text-orange"></text>
+            <text class="text-grey">Bug测试</text>
+        </navigator>
+    </view>
+</view>
+<view class="cu-tabbar-height"></view>

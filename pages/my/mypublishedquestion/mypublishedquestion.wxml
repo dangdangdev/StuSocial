@@ -1,0 +1,36 @@
+<!--pages/my/mypublishedquestion/mypublishedquestion.wxml-->
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">我发布的问题</view>
+</cu-custom>
+<scroll-view class="bg-white" scroll-y="true" style="height:100%;" bindscrolltolower="pullUpload">
+    <view class="bg-white" wx:for="{{questionList}}">
+        <view class="header" data-id="{{item.id}}">
+            <view class="flex justify-between align-center">
+                <view class="header_1 justify-left">
+                    <image class="cu-avatar round" src="{{item.student.avatarUrl}}" mode="aspectFill">
+                    </image>
+                    <view class="flex align-center" style="padding-left: 3%;">{{item.student.name}}</view>
+                </view>
+                <view style="margin-right:15rpx;padding-top: 3%;">
+                    <button class="cu-btn bg-gray shadow text-red" bindtap="deleteQuestion" data-id="{{item.id}}"
+                        data-index="{{index}}">删除</button>
+                </view>
+            </view>
+            <view class="intro_info" bindtap="enterQuestionDetail" data-id="{{item.id}}">
+                {{item.content}}
+            </view>
+            <view class="header_1 " style="padding-bottom: 3%;">
+                <text decode="{{true}}" space="{{true}}">{{item.answerCount}}条回复&nbsp;&nbsp;热度:{{item.record}}</text>
+            </view>
+        </view>
+        <view class="bg-grey light" style="height:1px"></view>
+    </view>
+    <view class="bg-white" wx:if="{{loading}}">
+        <image src="https://image.weilanwl.com/gif/loading-white.gif" mode="aspectFit" class="gif-white response"
+            style="height:240rpx"></image>
+    </view>
+    <view wx:else style="height: 30px;" class="bg-white padding-sm">
+        <text style="padding-left: 40%;">已经到底了</text>
+    </view>
+</scroll-view>

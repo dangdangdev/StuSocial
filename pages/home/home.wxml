@@ -1,0 +1,50 @@
+<!--pages/home/home.wxml-->
+
+<view class="cu-bar search bg-gradual-blue" style="padding-top:{{StatusBar}}px;padding-right:30%;padding-bottom:10px;">
+    <view class="search-form round">
+        <text class="cuIcon-search"></text>
+        <text class="text-grey">社区 | 问题 | 回答 | 用户</text>
+    </view>
+</view>
+<scroll-view scroll-x class="bg-white nav" scroll-with-animation :scroll-left="scrollLeft">
+    <view class="flex text-center">
+        <view class="cu-item flex-sub {{index==tabCur?'text-blue cur':''}}" wx:for="{{naviBarList}}" wx:key bindtap="tabSelect" data-id="{{index}}">
+            {{item}}
+        </view>
+    </view>
+</scroll-view>
+<scroll-view class="bg-white" scroll-y style="height:515px" bindscrolltolower="pullUpload">
+    <view class="cu-card article no-card" wx:for="{{questionAndMaxZanAnsList}}">
+        <view class="cu-item shadow" bindtap="enterAnswerDetail" data-qid="{{item.question.id}}" data-aid="{{item.maxZanAnswer.id}}">
+            <view class="title">
+                <view class="intro_info1">{{item.question.content}}</view>
+            </view>
+            <view class="header">
+                <view class="personal-info leftPD">
+                    <image class="avatar" src="{{item.maxZanAnswer.student.avatarUrl}}"
+                        mode="aspectFill"></image>
+                    <text class="nickname">{{item.maxZanAnswer.student.name}}</text>
+                </view>
+            </view>
+            <view class="content">
+                <view class="desc">
+                    <view class="intro_info">{{item.maxZanAnswer.content}}</view>
+                    <view>
+                        <view class="cu-tag bg-red light sm round">{{item.maxZanAnswer.zanCount}}点赞</view>
+                        <view class="cu-tag bg-green light sm round">{{item.maxZanAnswer.commentCount}}评论</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="bg-gray" style="height:5px;">
+
+        </view>
+    </view>
+    <view class="bg-white" wx:if="{{loading}}">
+        <image src="https://image.weilanwl.com/gif/loading-white.gif" mode="aspectFit" class="gif-white response"
+            style="height:200rpx"></image>
+    </view>
+    <view wx:else style="height: 60px;" class="bg-white padding-sm">
+        <text style="padding-left: 40%;">已经到底了</text>
+    </view>
+</scroll-view>

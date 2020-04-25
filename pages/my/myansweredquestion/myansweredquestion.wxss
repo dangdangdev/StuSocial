@@ -1,0 +1,45 @@
+/* pages/my/mypublishedquestion/mypublishedquestion.wxss */
+page{
+    background-color: white;
+    height:100%;
+}
+.header{
+    padding-left:5%;
+    padding-right: 5%;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.header_1{
+    display: flex;
+    flex-direction: row;
+    padding-top: 3%;
+}
+
+.intro_info{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:3;
+  overflow: hidden;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  padding-top:3%;
+  line-height: 40rpx;
+  font-size: 28rpx;
+  color: black;
+}
+
+.intro_info1{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:2;
+  overflow: hidden;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  padding-top:3%;
+  padding-bottom:3%;
+  line-height: 40rpx;
+  font-size: 28rpx;
+  color: black;
+}
