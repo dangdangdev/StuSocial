@@ -130,10 +130,17 @@ Page({
 
   submit(e) {
     var that = this
-    if (this.data.index == null || this.data.comName == null || this.data.comIntroduce == "") {
+    if (this.data.index == null || this.data.comName == null || this.data.comIntroduce == "" || this.data.imgList.length==0) {
       this.setData({
         hasCommited: true
       })
+      if(this.data.imgList.length==0){
+        wx.showToast({
+          title:"至少要一张图片",
+          duration:2000,
+          icon:'none'
+        })
+      }
     } else {
       that.setData({
         loading:true

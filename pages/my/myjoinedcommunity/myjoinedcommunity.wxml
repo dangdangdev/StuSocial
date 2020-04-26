@@ -1,5 +1,5 @@
 <!--pages/my/mycreatedcommunity/mycreatedcommunity.wxml-->
-<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+<cu-custom bgColor="bg-gradual-green" isBack="{{true}}">
     <view slot="backText"></view>
     <view slot="content">我加入的社区</view>
 </cu-custom>

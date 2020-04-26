@@ -26,14 +26,7 @@
 			</view>
 		</picker>
 	</view>
-	<view class="cu-form-group">
-		<view class="action">
-			社区成员
-		</view>
-		<view class="action">
-			<button class="cu-btn bg-green shadow" bindtap="showModal" data-target="checkboxModal">选择</button>
-		</view>
-	</view>
+	
 	<view class="cu-form-group cu-modal {{modalName=='checkboxModal'?'show':''}}" bindtap="noChoosedChexbox">
 		<view class="cu-dialog" catchtap>
 			<view class="cu-bar bg-white justify-end">
