@@ -84,7 +84,9 @@ Page({
             data: {
             },
             method: 'DELETE', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-            // header: {}, // 设置请求的 header
+            header: {
+              "Content-Type": "application/x-www-form-urlencoded"
+            }, // 设置请求的 header
             success: function (res) {
               wx.hideLoading()
               wx.showToast({

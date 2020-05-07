@@ -50,8 +50,9 @@ Page({
         method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
         // header: {}, // 设置请求的 header
         success: function (res) {
+          console.log(res.data)
           that.setData({
-            followStatus:res.data==null?1:2
+            followStatus:(res.data==null || res.data=="")?2:1
           })
         },
         fail: function () {
@@ -348,7 +349,9 @@ Page({
         toStuId:that.data.answer.student.id
       },
       method: 'DELETE', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-      // header: {}, // 设置请求的 header
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }, // 设置请求的 header
       success: function(res){
         that.setData({
           followStatus:2
@@ -473,7 +476,7 @@ Page({
     that.getstuZanAns(aid, app.globalData.user.id)
     setTimeout(() => {
       that.getFollowStatus()
-    }, 1000);
+    }, 1500);
      //延迟执行，要让上面先获得Answer
 
   },

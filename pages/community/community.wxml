@@ -39,7 +39,7 @@
                         </view>
                         <view style="margin-right:15rpx;">
                             <button class="cu-btn bg-gray shadow text-blue" bindtap="joinCommunity"
-                                data-id="{{item1.id}}">加入</button>
+                                data-id="{{item1.community.id}}">加入</button>
                         </view>
                     </view>
                     <view class="grid col-4 grid-square flex-sub margin-top-sm" bindtap="enterCommunity" data-id="{{item1.community.id}}">

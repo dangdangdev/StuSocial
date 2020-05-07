@@ -9,7 +9,8 @@ Page({
   data: {
     followedStudentList:[],
     page:0,
-    pagesize:12
+    pagesize:12,
+    loading:true
   },
 
   pullUpload() {
@@ -66,7 +67,9 @@ Page({
               toStuId: toStuId
             },
             method: 'DELETE', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-            // header: {}, // 设置请求的 header
+            header: {
+              "Content-Type": "application/x-www-form-urlencoded"
+            }, // 设置请求的 header
             success: function (res) {
               wx.hideLoading()
               wx.showToast({
@@ -100,7 +103,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that =this 
+    that.pullUpload()
   },
 
   /**
